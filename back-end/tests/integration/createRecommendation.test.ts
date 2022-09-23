@@ -3,10 +3,9 @@ import app from '../../src/app';
 import { prisma } from '../../src/database';
 import recommendationFactory from '../../prisma/factories/recommendationFactory';
 
-// beforeEach(async () => {
-//   await prisma.$queryRaw`TRUNCATE TABLE recommendations CASCADE`;
-//   await prisma.$queryRaw`ALTER TABLE recommendations_id_seq RESTART WITH 1`;
-// });
+beforeEach(async () => {
+  await prisma.$queryRaw`TRUNCATE TABLE recommendations RESTART IDENTITY CASCADE`;
+});
 
 afterAll(async () => {
   await prisma.$disconnect();
@@ -39,4 +38,12 @@ describe('Testing recommendation creation...', () => {
       .send({ name: rec.name });
     expect(response.status).toBe(422);
   });
+
+  it('Sending non-youtube link, must return ???', async () => {
+    const rec = recommendationFactory();
+    const response = await supertest(app)
+      .post('/recommendations')
+      .send(rec);
+    expect(response.status).toBe(422);
+  })
 });
