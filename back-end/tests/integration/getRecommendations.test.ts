@@ -42,5 +42,23 @@ describe('Testing get recommendations...', () => {
     expect(response.status).toBe(200);
     expect(response.body).toHaveLength(10);
     expect(response.body[0].id).toBe(totalRecs);
-  })
+  });
+
+  it('Getting from ID as parameter, must return 200 and the recommendation', async () => {
+    const rec = recommendationFactory();
+    await prisma.recommendation.create({ data: rec });
+    const response = await supertest(app).get('/recommendations/1');
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({
+      id: 1,
+      name: rec.name,
+      youtubeLink: rec.youtubeLink,
+      score: 0
+    });
+  });
+
+  it('Getting from an inexistant ID, must return 404', async () => {
+    const response = await supertest(app).get('/recommendations/1');
+    expect(response.status).toBe(404);
+  });
 });
