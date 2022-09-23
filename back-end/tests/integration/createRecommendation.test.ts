@@ -4,7 +4,7 @@ import { prisma } from '../../src/database';
 import recommendationFactory from '../../prisma/factories/recommendationFactory';
 
 beforeEach(async () => {
-  await prisma.$queryRaw`TRUNCATE TABLE recommendations RESTART IDENTITY CASCADE`;
+  await prisma.$queryRaw`TRUNCATE TABLE recommendations RESTART IDENTITY`;
 });
 
 afterAll(async () => {

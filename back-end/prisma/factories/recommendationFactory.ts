@@ -1,9 +1,10 @@
 import { faker } from '@faker-js/faker';
+import { Recommendation } from '@prisma/client'
 
-function recommendationFactory() {
+function recommendationFactory(): Omit<Recommendation, 'id' | 'score'> {
   return {
     name: faker.lorem.words(3),
-    youtubeLink: faker.internet.url(),
+    youtubeLink: faker.internet.url()
   };
 };
 
