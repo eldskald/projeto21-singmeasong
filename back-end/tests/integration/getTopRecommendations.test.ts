@@ -2,7 +2,6 @@ import supertest from 'supertest';
 import app from '../../src/app';
 import { prisma } from '../../src/database';
 import recommendationFactory from '../../prisma/factories/recommendationFactory';
-import { Recommendation } from '@prisma/client';
 
 beforeEach(async () => {
   await prisma.$queryRaw`TRUNCATE TABLE recommendations RESTART IDENTITY`;
