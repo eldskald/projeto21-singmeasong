@@ -3,18 +3,16 @@ import { recommendationService as service, CreateRecommendationData } from '../.
 import * as errorUtils from '../../src/utils/errorUtils';
 import recommendationFactory from '../../prisma/factories/recommendationFactory';
 
-jest.spyOn(repository, 'findByName').mockImplementation(() => null);
-jest.spyOn(errorUtils, 'conflictError').mockImplementation(() => null);
-jest.spyOn(repository, 'create').mockImplementation(
-  async (data: CreateRecommendationData) => { return; }
-);
-
 it('Testing insert()...', async () => {
-  let result: boolean | null = null;
+  jest.spyOn(repository, 'findByName').mockImplementation(() => null);
+  jest.spyOn(errorUtils, 'conflictError').mockImplementation(() => null);
+  jest.spyOn(repository, 'create').mockImplementation(
+    async (data: CreateRecommendationData) => { return; }
+  );
+  let result: boolean = true;
   const rec: CreateRecommendationData = recommendationFactory();
   try {
     await service.insert(rec)
-    result = true;
   } catch (_err) {
     result = false;
   }
