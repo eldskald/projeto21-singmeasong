@@ -19,4 +19,5 @@ it('Testing insert()...', async () => {
     result = false;
   }
   expect(result).toBe(true);
+  expect(repository.create).toBeCalled();
 });
