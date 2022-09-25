@@ -1,8 +1,6 @@
 import { recommendationRepository as repository } from '../../src/repositories/recommendationRepository';
 import { recommendationService as service, CreateRecommendationData } from '../../src/services/recommendationsService';
-import * as errorUtils from '../../src/utils/errorUtils';
 import recommendationFactory from '../../prisma/factories/recommendationFactory';
-import { Prisma, Recommendation } from '@prisma/client';
 
 it('Testing upvote()...', async () => {
   const rec: CreateRecommendationData = recommendationFactory();
@@ -18,12 +16,7 @@ it('Testing upvote()...', async () => {
   );
   jest.spyOn(repository, 'find').mockImplementation(
     (id: number): any => {
-      return () => ({
-        id,
-        name: rec.name,
-        youtubeLink: rec.youtubeLink,
-        score: 0
-      });
+      return true;
     }
   );
   let result: boolean = true;
