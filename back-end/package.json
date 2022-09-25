@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "nodemon src/server.ts",
     "test:unit": "npx dotenv-cli -e .env.test jest -- -i --coverage --testPathPattern=tests/unit",
-    "test:integration": "npx dotenv-cli -e .env.test jest -- -i --coverage --testPathPattern=tests/integration",
+    "test:integration": "npx dotenv-cli -e .env.test jest -- -i --testPathPattern=tests/integration",
     "build": "tsc",
     "start": "node dist/server.js"
   },
