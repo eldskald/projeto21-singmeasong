@@ -4,23 +4,13 @@ import { prisma } from "../database.js";
 const testRouter = Router();
 
 testRouter.post('/empty-db', async (_req: Request, res: Response) => {
-  await prisma.$queryRaw`TRUNCATE TABLE recommendations RESET IDENTITY`;
+  await prisma.$queryRaw`TRUNCATE TABLE recommendations RESTART IDENTITY`;
   return res.sendStatus(200);
 });
 
 testRouter.post('/seed-db', async (_req: Request, res: Response) => {
   await prisma.recommendation.createMany({
     data: [
-      {
-        name: 'SMD Soldering Tutorial',
-        youtubeLink: 'https://youtu.be/fYInlAmPnGo',
-        score: 24
-      },
-      {
-        name: 'Shaders for Game Devs Part 1, by Fréya Holmer',
-        youtubeLink: 'https://youtu.be/kfM-yu0iQBk',
-        score: 38
-      },
       {
         name: 'sleepmakeswaves - Cascades',
         youtubeLink: 'https://youtu.be/LluWlHGvE2w',
@@ -34,7 +24,7 @@ testRouter.post('/seed-db', async (_req: Request, res: Response) => {
       {
         name: 'Sólstafir - Hula',
         youtubeLink: 'https://youtu.be/4nkljmJVLxg',
-        score: 22
+        score: 24
       },
       {
         name: 'Meniscus - Cursed',
@@ -55,11 +45,6 @@ testRouter.post('/seed-db', async (_req: Request, res: Response) => {
         name: 'LIGHTS OUT ASIA - They Disappear into the Palms',
         youtubeLink: 'https://youtu.be/xFUDmxyNmoU',
         score: 7
-      },
-      {
-        name: 'How to Create Ghibli Trees in Blender',
-        youtubeLink: 'https://youtu.be/DEgzuMmJtu8',
-        score: 22
       },
       {
         name: 'Etokie - Every Ghost Knows Its Shape (Live Improv)',
