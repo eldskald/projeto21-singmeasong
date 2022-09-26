@@ -3,12 +3,8 @@ import { prisma } from "../database.js";
 
 const testRouter = Router();
 
-testRouter.post('/empty-db', async (_req: Request, res: Response) => {
+testRouter.post('/ready-db', async (_req: Request, res: Response) => {
   await prisma.$queryRaw`TRUNCATE TABLE recommendations RESTART IDENTITY`;
-  return res.sendStatus(200);
-});
-
-testRouter.post('/seed-db', async (_req: Request, res: Response) => {
   await prisma.recommendation.createMany({
     data: [
       {
